@@ -1,0 +1,48 @@
+# Common
+**/xcuserdata/
+.DS_Store
+*.mobileprovision
+*.dSYM.zip
+*.ipa
+*.xcuserstate
+*.xcodeproj
+*.xcworkspace
+*.d
+*.dia
+*.o
+*.orig
+
+# Buck Stuff
+.buckd
+buck-out/
+/buck
+/build/
+.buckconfig.local
+
+# Temp files
+*\~
+\.bundle/
+
+# Removing Python precompiled files
+*.pyc
+
+/build/*/*
+PrebuiltPods/*/*
+Pods/*/*
+Pods/*
+fastlane/brands/*/screenshots/*/*.png
+report.xml
+
+# Removing fastlane test files
+fastlane/test_output/
+fastlane/derived_data/
+
+# Don't ignore these
+!Dummy.swift
+!Pods/BUCK
+
+# Visual Studio
+.vscode/
+
+# vim
+*.swp

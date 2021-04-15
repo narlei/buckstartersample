@@ -1,0 +1,36 @@
+[cxx]
+  default_platform = iphonesimulator-x86_64
+  cflags = -g -fmodules -fobjc-arc -w $(config custom.other_cflags)
+  cxxflags = -fobjc-arc -std=c++14 -D DEBUG -g $(config custom.other_cxxflags)
+  combined_preprocess_and_compile = true
+  pch_enabled = false
+  cache_links = false
+  cache_strips = false
+  ldflags = -Xlinker -objc_abi_version -Xlinker 2 -fobjc-arc -fobjc-link-runtime $(config custom.other_ldflags) -rpath /usr/lib/swift -L /usr/lib/swift
+
+[swift]
+  use_swift_delegate = false
+  version = 5
+  compiler_flags = -DBUCK $(config custom.other_swift_compiler_flags) -Xcc -Wno-incomplete-umbrella
+  use_filelist = true
+  use_arg_file = true
+
+[apple]
+  use_swift_delegate = false
+  iphonesimulator_target_sdk_version = 14.0
+  iphoneos_target_sdk_version = 14.0
+  provisioning_profile_read_command = security cms -Di
+  xctool_default_destination_specifier = platform=iOS Simulator,OS=latest
+  xctool_path = /Users/narleiamericomoreira/sources/ifood/ifood-consumer-ios/tools/xctool/bin/xctool
+
+[project]
+  ide_force_kill = always
+  project_schemes = true
+  ide = xcode
+  allow_symlinks = forbid
+  ignore = tools, \
+           .git, \
+
+[parser]
+  polyglot_parsing_enabled = true
+  default_build_file_syntax = SKYLARK

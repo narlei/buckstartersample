@@ -1,0 +1,33 @@
+apple_resource(
+    name = "VeryCoolAppResources",
+    visibility = ["PUBLIC"],
+    files = glob([
+        "**/*.xib"
+    ]),
+)
+
+apple_asset_catalog(
+    name = "VeryCoolAppAssets",
+    visibility = ["PUBLIC"],
+    dirs = ["Media.xcassets"],
+)
+
+apple_binary(
+    name = "VeryCoolAppBinary",
+    visibility = ["PUBLIC"],
+    srcs = glob(['**/*.swift']),
+    deps = [":VeryCoolAppResources",
+            ":VeryCoolAppAssets",
+            "//VeryCoolLibrary:VeryCoolLibrary"],
+    is_main_run_destination = True,
+)
+
+apple_bundle(
+    name = "VeryCoolApp",
+    visibility = ["PUBLIC"],
+    extension = "app",
+    binary = ":VeryCoolAppBinary",
+    product_name = "VeryCoolApp",
+    info_plist = "Info.plist",
+    info_plist_substitutions = {"PRODUCT_MODULE_NAME": "VeryCoolAppBinary"},
+)

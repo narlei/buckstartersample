@@ -1,0 +1,27 @@
+apple_library(
+    name = "VeryCoolLibrary",
+    visibility = ["PUBLIC"],
+    srcs = glob(['*.swift']),
+    tests = [":VeryCoolLibraryTests"],
+)
+
+
+apple_test(
+    name =  "VeryCoolLibraryTests",
+    visibility = ["PUBLIC"],
+    info_plist = "Tests/TestInfo.plist",
+    is_ui_test = False,
+    run_test_separately = True,
+    destination_specifier = {
+        "name": "iPhone 12",
+    },
+    frameworks = [
+        '$PLATFORM_DIR/Developer/Library/Frameworks/XCTest.framework'
+    ],
+    deps = [
+        "//VeryCoolLibrary:VeryCoolLibrary",
+    ],
+    srcs = glob([
+        "Tests/Sources/*.swift",
+    ]),
+)
