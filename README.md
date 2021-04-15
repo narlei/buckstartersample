@@ -1,4 +1,6 @@
-# Buck starter example
+![](images/cover.png)
+
+# Buck starter sample
 This project will help you to start a project using [Buck build system](https://buck.build/).
 
 ## Mindset
