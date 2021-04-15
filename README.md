@@ -134,3 +134,63 @@ apple_binary(
 ```
 
 **Congratulations!!!** Now, buck can build your app! Try make: `buck build VeryCoolApp`
+
+## Library 
+Yeah, finally we will create a Module! An independent module.
+Please, go to **VeryCoolLibrary/BUCK**.
+
+Here is more simple, it’s a `apple_library` :
+
+```
+apple_library(
+    name = “VeryCoolLibrary”,
+    visibility = [“PUBLIC”],
+    srcs = glob([‘*.swift’]),
+    tests = [“:VeryCoolLibraryTests”],
+)
+```
+
+It’s and independent library. This library have a `tests` module inside:
+
+```
+apple_test(
+    name =  “VeryCoolLibraryTests”,
+    ...
+    deps = [
+        “//VeryCoolLibrary:VeryCoolLibrary”,
+    ],
+    srcs = glob([
+        “Tests/Sources/*.swift”,
+    ]),
+)
+```
+
+### Using the library
+
+Now, to use the library is too easy, do you remember de `deps` ?
+
+```
+apple_binary(
+    name = “VeryCoolAppBinary”,
+    visibility = [“PUBLIC”],
+    srcs = glob([‘**/*.swift’]),
+    deps = [“:VeryCoolAppResources”,
+            “:VeryCoolAppAssets”,
+            “//VeryCoolLibrary:VeryCoolLibrary”],
+)
+```
+
+**Congratulations!!!** Now, buck can test your library! Try make: `buck test //VeryCoolLibrary -n “iPhone 12`
+
+## Makefile
+The make file is only to help you with the commands. Just run `make build` for example. Open the `makefile` to see all options.
+
+## Xcode
+Yes, Buck can create a Xcode project to you use to develop. Using the makefile, just run `make xcode` .
+
+
+## DONE! Now you are building a iOS Project without Xcode!
+
+For questions/suggestions please [Create an issue!](https://github.com/narlei/buckstartersample/issues)
+
+I hope this help you!
