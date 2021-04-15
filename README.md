@@ -47,6 +47,9 @@ Each module need to work “alone”, with dependencies of course, but you need 
 Each module need a **BUCK** file. It’s a file without extension named **BUCK**.
 In this file you will teach buck how build the module.
 
+### Config
+To use buck, some default configs are needed. See the file `.buckconfig` . This file contains the default configs and some paths needed.
+
 ### App module
 
 To generate a .app, or using the correct term, a Bundle, you need a Binary.
@@ -82,3 +85,52 @@ apple_bundle(
 Finally, the Bundle is the app! A Bundle is in resume a folder that contains all compiled sources.
 
 All of parameters you can find at [buck documentation](https://buck.build/rule/apple_bundle.html).
+
+“Ok, but my app have assets and xibs and storyboards, where I put it?”
+
+As I saw before, BUCK file is how we teach buck to build our files.  Let’s see how compile assets:
+
+```
+apple_asset_catalog(
+    name = “VeryCoolAppAssets”,
+    visibility = [“PUBLIC”],
+    dirs = [“Media.xcassets”],
+)
+```
+
+After added the `apple_asset_catalog` to your buck file, you need use it as dependency in your app:
+
+```
+apple_binary(
+    name = “VeryCoolAppBinary”,
+    visibility = [“PUBLIC”],
+    srcs = glob([‘**/*.swift’]),
+    deps = [“:VeryCoolAppAssets”],
+)
+```
+
+Ok, next step is compile de xibs and storyboards, the resources:
+
+```
+apple_resource(
+    name = “VeryCoolAppResources”,
+    visibility = [“PUBLIC”],
+    files = glob([
+        “**/*.xib”
+    ]),
+)
+```
+
+If you need to compile storyboards too, just add to `files` . Now, let’s use it as dependency:
+
+```
+apple_binary(
+    name = “VeryCoolAppBinary”,
+    visibility = [“PUBLIC”],
+    srcs = glob([‘**/*.swift’]),
+    deps = [“:VeryCoolAppResources”,
+            “:VeryCoolAppAssets”],
+)
+```
+
+**Congratulations!!!** Now, buck can build your app! Try make: `buck build VeryCoolApp`
