@@ -21,7 +21,7 @@
   iphoneos_target_sdk_version = 14.0
   provisioning_profile_read_command = security cms -Di
   xctool_default_destination_specifier = platform=iOS Simulator,OS=latest
-  xctool_path = /Users/narleiamericomoreira/sources/ifood/ifood-consumer-ios/tools/xctool/bin/xctool
+  xctool_path = tools/xctool/bin/xctool
 
 [project]
   ide_force_kill = always

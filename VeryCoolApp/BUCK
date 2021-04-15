@@ -19,7 +19,6 @@ apple_binary(
     deps = [":VeryCoolAppResources",
             ":VeryCoolAppAssets",
             "//VeryCoolLibrary:VeryCoolLibrary"],
-    is_main_run_destination = True,
 )
 
 apple_bundle(
